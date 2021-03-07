@@ -1,4 +1,6 @@
-module.exports = ({ env }) => {
+const parse = require('pg-connection-string').parse;
+const config = parse(process.env.DATABASE_URL);
+module.exports = ({ env }) =>
   // if (env('NODE_ENV') === 'development') {
   //   return ({
   //     defaultConnection: 'default',
@@ -16,9 +18,8 @@ module.exports = ({ env }) => {
   //     },
   //   })
   // } else {
-    const parse = require('pg-connection-string').parse;
-    const config = parse(process.env.DATABASE_URL);
-    return ({
+
+     ({
       defaultConnection: 'default',
       connections: {
         default: {
@@ -39,6 +40,6 @@ module.exports = ({ env }) => {
           },
         },
       },
-    })
+
   // }
-};
+});
