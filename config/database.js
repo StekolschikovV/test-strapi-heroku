@@ -1,24 +1,24 @@
 module.exports = ({ env }) => {
-  if (process.env.NODE_ENV === 'development') {
-    return ({
-      defaultConnection: 'default',
-      connections: {
-        default: {
-          connector: 'bookshelf',
-          settings: {
-            client: 'sqlite',
-            filename: env('DATABASE_FILENAME', '.tmp/data.db'),
-          },
-          options: {
-            useNullAsDefault: true,
-          },
-        },
-      },
-    })
-  } else {
+  // if (env('NODE_ENV') === 'development') {
+  //   return ({
+  //     defaultConnection: 'default',
+  //     connections: {
+  //       default: {
+  //         connector: 'bookshelf',
+  //         settings: {
+  //           client: 'sqlite',
+  //           filename: env('DATABASE_FILENAME', '.tmp/data.db'),
+  //         },
+  //         options: {
+  //           useNullAsDefault: true,
+  //         },
+  //       },
+  //     },
+  //   })
+  // } else {
     const parse = require('pg-connection-string').parse;
     const config = parse(process.env.DATABASE_URL);
-    return {
+    return ({
       defaultConnection: 'default',
       connections: {
         default: {
@@ -39,6 +39,6 @@ module.exports = ({ env }) => {
           },
         },
       },
-    }
-  }
+    })
+  // }
 };
